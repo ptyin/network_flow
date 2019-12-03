@@ -20,8 +20,10 @@ for i in range(left):
     print("\n")
 
 print('Max Matching: %g' % solver.ans())
+solver.show()
 ```
 ![](demo.png)
 
 结果如下
 ![](ans.png)
+![](myplot.png)
