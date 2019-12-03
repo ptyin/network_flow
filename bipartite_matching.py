@@ -1,5 +1,7 @@
 import numpy as np
 import pulp
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 
 class Solver:
@@ -35,13 +37,31 @@ class Solver:
     def ans(self):
         return self.m.objective.value()
 
+    def show(self):
+        plt.title = "Bipartite Matching"
+        fig = plt.figure(1)
+        ax: plt.Axes = fig.add_subplot(1, 1, 1)
+        ax.scatter([-5]*self.left, range(self.left))
+        ax.scatter([5]*self.right, range(self.right))
+
+        for i in range(self.left):
+            for j in range(self.right):
+                if self.A[i, j]:
+                    ax.add_line(Line2D((-5, 5), (i, j), color='yellow'))
+
+        for i in range(self.left):
+            for j in range(self.right):
+                if self.X[i][j].varValue == 1:
+                    ax.add_line(Line2D((-5, 5), (i, j), color='green'))
+        plt.show()
+
 
 if __name__ == '__main__':
     left = int(input("Input the number of vertices in left set: "))
     right = int(input("Input the number of vertices in right set: "))
 
     A = np.zeros((left, right), dtype=int)
-    while(True):
+    while True:
         try:
             i, j = input("Input one pair(press CTRL+D to stop): ").split(" ")
             A[int(i), int(j)] = 1

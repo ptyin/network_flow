@@ -14,3 +14,4 @@ for i in range(left):
     print("\n")
 
 print('Max Matching: %g' % solver.ans())
+solver.show()
